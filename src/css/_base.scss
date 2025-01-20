@@ -1,0 +1,11 @@
+@layer base {
+  html,
+  body {
+    @apply tw-font-roboto tw-text-sm2;
+    color: #2e3033;
+  }
+  h2 {
+    @apply tw-font-bold;
+    font-size: 32px;
+  }
+}
