@@ -3,7 +3,7 @@
     :modelValue="modelValue"
     @update:model-value="(val) => $emit('update:modelValue', val)"
   >
-    <q-card class="tw-max-w-[410px] tw-w-full !tw-overflow-visible" square>
+    <q-card class="tw-max-w-[410px] tw-w-full" square>
       <q-card-section class="tw-p-6">
         <button type="button" v-close-popup class="tw-float-right">
           <svg

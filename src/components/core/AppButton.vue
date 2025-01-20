@@ -16,11 +16,9 @@ button {
   &:hover {
     @apply tw-bg-blue-hover;
   }
-  &.active,
   &:active {
     @apply tw-bg-blue-active;
   }
-
   &[disabled] {
     @apply tw-bg-gray-border tw-text-line;
   }

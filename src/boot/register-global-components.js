@@ -8,10 +8,7 @@ import FloatingSelect from "src/components/core/FloatingLabel/select.vue";
 import AppCheck from "src/components/core/AppCheck.vue";
 import AppTextarea from "src/components/core/AppTextarea.vue";
 import AppPopup from "src/components/core/AppPopup.vue";
-import Modal from "src/core/AppModal.vue";
-import BaseButton from "src/core/BaseButton.vue";
 import { Form } from "vee-validate";
-
 export default ({ app }) => {
   app.component("app-input", AppInput);
   app.component("app-date", AppDateInput);
@@ -23,7 +20,5 @@ export default ({ app }) => {
   app.component("VForm", Form);
   app.component("app-checkbox", AppCheck);
   app.component("app-textarea", AppTextarea);
-  app.component("Modal", Modal);
-  app.component("BaseButton", BaseButton);
   app.component("popup", AppPopup);
 };

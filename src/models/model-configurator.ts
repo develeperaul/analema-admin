@@ -30,22 +30,20 @@ export interface Parametrs {
 
 export interface Wishes {
   text: string;
-  type: number;
+  type: null | Option;
   mounting: boolean;
   email: string;
   measurement_date: {
     date: string;
-    time: string | number;
+    time: Option;
   };
-  elevator: string | number;
-  diller: string;
-
+  elevator: Option;
+  diller: Option;
 }
 
 export interface Configure {
   windows: Windows;
   parametrs: Parametrs;
-  comment: string;
   // wishes: Wishes;
 }
 

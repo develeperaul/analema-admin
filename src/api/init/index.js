@@ -45,7 +45,7 @@ class Server {
   }
 }
 const options = {
-  apiPath: "api/admin/",
+  apiPath: "api/auth/",
   timeout: 10000,
 };
 

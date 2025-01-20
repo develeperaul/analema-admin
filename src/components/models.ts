@@ -1,5 +1,3 @@
-import { Option } from "src/models/model-select";
-
 export interface Todo {
   id: number;
   content: string;
@@ -11,60 +9,27 @@ export interface Meta {
 
 export type Order = {
   id: number;
-  date: string;
+  fast: null | {
+    files: string[];
+    text: string;
+  };
+  number: number;
   data: string;
-  status: Status;
-  status_id: string | number;
+  conf: null | string;
   summ: string;
-  contact_fio: string;
-  contact_phone: string;
-  contact_address: string;
-  contact_city: string;
-  documents: string[];
-  fast_order: "0" | "1";
-  fast_photo: string[];
-  documents_ur: string[];
-  text: string;
-  diler_status: number;
-  // fast: null | {
-  //   files: string[];
-  //   text: string;
-  // };
-  // conf: null | string;
-};
-export type OrderList = {
-  id: string;
-  date: string;
-  data: string;
   status: Status;
-  status_id: string | number;
-  summ: string;
 };
+
 export type Status = { id: number; value: string };
 
 export type Diler = {
-  id: string;
-  nazvanie: string;
-  city: string;
-  phone: string;
-  active: "Y" | "N" | boolean;
-  address: string;
-  email: string;
-};
-export type NewDiler = {
-  nazvanie: string;
+  id?: number;
   name: string;
-  "last-name": string;
-  "second-name": string;
+  yr_address: string;
+  zone_action: string;
   phone: string;
-  yraddress: string;
   email: string;
-  password: string;
-  inn: string;
-  ogrn: string;
-  rekvizity: string;
-  address: string;
-  city: string;
+  status: boolean;
 };
 
 export type Notification = {
@@ -83,16 +48,10 @@ export type Application = {
 };
 
 export type ProfileCompany = {
-  id: string;
-  nazvanie: string;
-  site: string;
-  phone: string;
-  zona: string;
-  vk: string;
-  ok: string;
-  telegram: string;
+  name: string;
   address: string;
-  email: string;
+  sait: string;
+  phone: string;
 };
 
 export type Promotion = {
@@ -104,13 +63,3 @@ export type Promotion = {
   image: string;
   for: "client" | "diler";
 };
-
-
-export interface StatisticsI {
-  count: number;
-  summ: number;
-  countStart: number;
-  summStart: number;
-  countEnd: number;
-  summEnd: number;
-}

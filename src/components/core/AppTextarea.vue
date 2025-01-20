@@ -60,7 +60,7 @@ import {
 } from "vue";
 import { useField } from "vee-validate";
 export default defineComponent({
-  name: "app-textarea",
+  name: "app-input",
   props: {
     label: {
       default: "",

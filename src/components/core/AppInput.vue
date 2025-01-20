@@ -119,9 +119,6 @@ export default defineComponent({
 }
 </style>
 <style lang="scss" scoped>
-.field {
-  width: 100%;
-}
 .field__wrapper {
   @apply tw-relative tw-w-full tw-h-[42px];
   .input {
