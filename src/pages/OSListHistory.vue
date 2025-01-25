@@ -73,7 +73,7 @@ table {
   min-width: 100%;
   /* These are just initial values which are overriden using JavaScript when a column is resized */
   grid-template-columns:
-    minmax(0, 250px)
+    minmax(150px, 250px)
     minmax(150px, 1fr)
     minmax(150px, 1fr)
     minmax(40px, 40px);

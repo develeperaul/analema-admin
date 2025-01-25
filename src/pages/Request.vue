@@ -22,12 +22,12 @@
             },
           }"
         >
-          <div class="tw-grid tw-grid-cols-4 tw-gap-3">
+          <div class="tw-grid l:tw-grid-cols-4 tw-gap-3">
             <a
               v-for="src in request.photo"
               :href="'https://analemmatrade.ru/' + src"
               data-fancybox
-              class="tw-h-[200px] tw-2-[200px]"
+              class="tw-h-[200px]"
             >
               <img
                 class="tw-rounded-md tw-object-cover tw-w-full tw-h-full"
@@ -63,9 +63,9 @@
           </div>
         </VForm>
       </div>
-      <div class="tw-grid tw-gap-3">
+      <div v-if="request.status_id === '7292'" class="tw-grid tw-gap-3">
         <div class="tw-font-bold tw-text-lg tw-mb-2">Оценка магазина</div>
-        <div v-if="request.status_id === '7292'" class="tw-grid tw-gap-4">
+        <div class="tw-grid tw-gap-4">
           <CardField title="Цена" :text="request.price" />
           <CardField title="Комментарий" :text="request.comment" />
           <CardField title="Статус" :text="request.status" />
@@ -86,6 +86,7 @@ import Fancybox from "src/components/Fancybox.vue";
 import CardField from "src/components/CardField.vue";
 import { Option } from "src/models/model-select";
 import { getRequest, updateRequest } from "src/api/online-scene";
+import { getToken, setInfoPushData } from "src/api";
 
 export default defineComponent({
   props: {
@@ -108,20 +109,36 @@ export default defineComponent({
     });
 
     const evaluate = async () => {
-      await updateRequest({
-        id: props.id,
-        comment: fields.value.comment,
-        price: fields.value.price,
-        status: "7292",
-      });
-      await getRequest(props.id);
+      if (request.value) {
+        updateRequest({
+          id: props.id,
+          comment: fields.value.comment,
+          price: fields.value.price,
+          status: "7292",
+        });
+        const { id: userId } = await getToken(request.value.token);
+
+        await setInfoPushData(
+          userId,
+          "оценка произведена",
+          `здравствуйте, стоимость товара составляет ${fields.value.price} руб.`
+        );
+
+        request.value = await getRequest(props.id);
+      }
     };
     const cancel = async () => {
-      await updateRequest({
-        id: props.id,
-        status: "7293",
-      });
-      await getRequest(props.id);
+      if (request.value) {
+        updateRequest({
+          id: props.id,
+          status: "7293",
+        });
+        const { id: userId } = await getToken(request.value.token);
+
+        await setInfoPushData(userId, "оценка отклонена", "");
+
+        request.value = await getRequest(props.id);
+      }
     };
     const popupEvent = (e: string) => {
       message.value = e;

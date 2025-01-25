@@ -45,7 +45,12 @@
         </Fancybox>
       </div>
 
-      <app-button @click="updateStatus" type="button" text="Одобрить" />
+      <app-button
+        v-if="request.status_id != 7298"
+        @click="updateStatus"
+        type="button"
+        text="Одобрить"
+      />
       <!-- <popup v-model="modalPopup">
         <p class="tw-flex tw-justify-center">
           {{ message }}
@@ -63,6 +68,7 @@ import { Option } from "src/models/model-select";
 import { getOSDetail, updateOS } from "src/api/os";
 
 import "@fancyapps/ui";
+import { getToken, setInfoPushData } from "src/api";
 
 export default defineComponent({
   props: {
@@ -85,11 +91,17 @@ export default defineComponent({
     });
 
     const updateStatus = async () => {
-      await updateOS({
-        id: props.id,
-        status: "7298",
-      });
-      await getOSDetail(props.id);
+      if (request.value) {
+        updateOS({
+          id: props.id,
+          status: "7298",
+        });
+        const { id: userId } = await getToken(request.value.token);
+
+        await setInfoPushData(userId, "Спасибо ваша заявка принята", "");
+
+        request.value = await getOSDetail(props.id);
+      }
     };
 
     const popupEvent = (e: string) => {
