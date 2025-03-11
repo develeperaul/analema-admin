@@ -79,24 +79,14 @@ export default defineComponent({
     const message = ref("");
     const login = handleSubmit(async (values) => {
       const { email, pass } = values;
-      console.log(values);
 
       isSubmitting.value = true;
       localStorage.setItem("token", "token");
       try {
-        const { groups } = await store.authUser(email, pass);
+        await store.authUser(email, pass);
         message.value = "";
+        (isSubmitting.value = false), (window.location.href = "/admin/");
 
-        window.localStorage.setItem("groups", groups);
-
-        if (groups.indexOf("6") !== -1) {
-
-          (isSubmitting.value = false), (window.location.href = "/diler/");
-        }
-        if (groups.indexOf("1") !== -1) {
-
-          (isSubmitting.value = false), (window.location.href = "/personal/");
-        }
 
         // window.localStorage.setItem("email", email);
       } catch (e) {
